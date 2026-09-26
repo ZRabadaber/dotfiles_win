@@ -1,5 +1,9 @@
-git init --bare $env:USERPROFILE/.dotfiles
-git --git-dir=$env:USERPROFILE/.dotfiles --work-tree=$env:USERPROFILE config --local status.showUntrackedFiles no
+$dotfiles = Join-Path $env:USERPROFILE '.dotfiles'
+git "--git-dir=$dotfiles" rev-parse --is-bare-repository *> $null
+if ($LASTEXITCODE -ne 0) {
+    git init --bare $dotfiles
+}
+git "--git-dir=$dotfiles" "--work-tree=$env:USERPROFILE" config --local status.showUntrackedFiles no
 
 Add-Content -Path $PROFILE -Value '$git = "git.exe"
 function git-dot {& $git "--git-dir=$env:USERPROFILE\.dotfiles" "--work-tree=$env:USERPROFILE" $args}
