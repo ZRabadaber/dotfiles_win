@@ -1,6 +1,6 @@
 
 [mgr]
-ratio = [2, 3, 4]
+ratio = [0, 3, 4]
 sort_dir_first = true
 linemode = "size"
 max_width = 3840
